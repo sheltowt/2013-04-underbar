@@ -211,6 +211,19 @@ var _ = {};
   //   }, 0); // should be 6
   //
   _.reduce = function(obj, iterator, initialValue) {
+  		if(initialValue == undefined){
+	  		var num = 0;
+  		}
+  		else{
+	  		var num = initialValue;
+  		}
+  		
+  		for(var x in obj){
+  			num = iterator(obj[x], num)	
+  		}
+  		
+  		console.log(num);
+  		return num;
   };
 
   // Determine if the array or object contains a given value (using `===`).
@@ -228,7 +241,34 @@ var _ = {};
 
   // Determine whether all of the elements match a truth test.
   _.every = function(obj, iterator) {
+  	if(obj.length == 0){
+	  	return true;
+  	}
+  	else{
+  	var count = true;
+  	for(var x in obj){
+  		console.log(obj[x]);
+  		var test = iterator(obj[x])
+  		if(test === 1){
+	  		test = true;
+  		}
+  		if(test === 0){
+	  		test = ;
+  		}
+  		if(test === undefined){
+	  		count = false;
+  		}
+  		console.log(test);
+  		if(test == false){
+		  	count = false;
+		  	//console.log("HELLO");
+	  	}
+	  	//console.log(count);
+  	return count;
     // TIP: use reduce on this one!
+    	  	
+  	}
+  }
   };
 
   // Determine whether any of the elements pass a truth test. If no iterator is

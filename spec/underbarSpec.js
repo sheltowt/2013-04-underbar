@@ -206,7 +206,7 @@ describe("invoke with function reference", function() {
     expect(result[1]).to.eql([1, 2, 3]);
   });
 });
-*/
+
 
 describe("reduce", function() {
   it("should be able to sum up an array", function() {
@@ -224,7 +224,7 @@ describe("reduce", function() {
 
 });
 
-/*
+
 describe("contains", function() {
   it("should return true if a collection contains a user-specified value", function() {
     expect(_.contains([1,2,3], 2)).to.equal(true);
@@ -235,6 +235,8 @@ describe("contains", function() {
     expect(_.contains([1,3,9], 2)).to.equal(false);
   });
 });
+
+*/
 
 describe("every", function() {
   var getValue = function(i) { return i; };
@@ -272,6 +274,8 @@ describe("every", function() {
     expect(_.every([undefined, undefined, undefined], getValue)).to.equal(false);
   });
 });
+
+/*
 
 describe("any", function() {
   var nativeSome = Array.prototype.some;
