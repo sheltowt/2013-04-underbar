@@ -1,5 +1,5 @@
-var returnArguments = function(){ return arguments; };
 /*
+
 describe("last", function() {
   it("should pull the last element from an array", function() {
     expect(_.last([1,2,3])).to.equal(3);
@@ -207,7 +207,11 @@ describe("invoke with function reference", function() {
   });
 });
 
-
+*/
+/*
+/*
+/*
+*/
 describe("reduce", function() {
   it("should be able to sum up an array", function() {
     var callback = function(sum, num) {return sum + num; };
@@ -236,7 +240,7 @@ describe("contains", function() {
   });
 });
 
-*/
+
 
 describe("every", function() {
   var getValue = function(i) { return i; };
@@ -275,7 +279,6 @@ describe("every", function() {
   });
 });
 
-/*
 
 describe("any", function() {
   var nativeSome = Array.prototype.some;
@@ -330,6 +333,8 @@ describe("any", function() {
   });
 });
 
+
+
 describe("extend", function() {
   it("should extend an object with the attributes of another", function() {
     var extended = _.extend({}, {a:'b'});
@@ -361,6 +366,7 @@ describe("extend", function() {
     expect(extended.hasOwnProperty('a') && extended.hasOwnProperty('b')).to.be(true);
   });
 });
+/*
 
 describe("defaults", function() {
   var result, options;

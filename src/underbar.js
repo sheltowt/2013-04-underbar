@@ -72,15 +72,25 @@ var _ = {};
 
 
   // Call iterator(value, key, collection) for each element of collection
-  _.each = function(obj, iterator) {
-  		console.log(obj);
-  		function logArrayElements(element, index, array) {
-  			
-	  		console.log("a[" + index + "] = " + element);
-	  		}
-  		obj.forEach(iterator);
-  		
-  };
+_.each = function(obj, iterator) {  
+	if(Array.isArray(obj)){
+    for( var i = 0; i < obj.length; i++){
+      iterator(obj[i], i, obj);
+    } 
+  } else {
+    for(var key in obj){
+      if(obj.hasOwnProperty(key)){
+        iterator(obj[key], key, obj)
+
+      }
+
+    }
+
+  }
+
+};
+
+
 
   /*
    * TIP: Here's an example of a function that needs to iterate, which we've
@@ -217,13 +227,12 @@ var _ = {};
   		else{
 	  		var num = initialValue;
   		}
-  		
+  		var sum = 0;
   		for(var x in obj){
-  			num = iterator(obj[x], num)	
+	  		var sump = iterator(num, obj[x]) 
+	  		sum += sump
   		}
-  		
-  		console.log(num);
-  		return num;
+  		return sum;
   };
 
   // Determine if the array or object contains a given value (using `===`).
@@ -241,42 +250,52 @@ var _ = {};
 
   // Determine whether all of the elements match a truth test.
   _.every = function(obj, iterator) {
-  	if(obj.length == 0){
-	  	return true;
-  	}
-  	else{
-  	var count = true;
-  	for(var x in obj){
-  		console.log(obj[x]);
-  		var test = iterator(obj[x])
-  		if(test === 1){
-	  		test = true;
-  		}
-  		if(test === 0){
-	  		test = ;
-  		}
-  		if(test === undefined){
-	  		count = false;
-  		}
-  		console.log(test);
-  		if(test == false){
-		  	count = false;
-		  	//console.log("HELLO");
-	  	}
-	  	//console.log(count);
+  		var count = true;
+	 	for(var x in obj){
+		 	var t = iterator(obj[x])
+		 		if(t == false){
+			 		count = false;
+		 		}if(t == undefined){
+			 		count = false;
+		 		}
+	 	}
   	return count;
-    // TIP: use reduce on this one!
-    	  	
-  	}
-  }
+  	
   };
 
   // Determine whether any of the elements pass a truth test. If no iterator is
   // provided, provide a default one
   _.any = function(obj, iterator) {
     // TIP: re-use every() here
+    if(obj === []){
+	    return false;
+    }
+    if(iterator == undefined){
+    	var count = false;
+    	for(var x in obj){
+    		if(obj[x] == true){
+	    		count = true;
+    		}if(obj[x] == undefined){
+			 		count = true;
+		 		}
+		 		console.log(count);
+    		return count;
+    	}
+	    
+    }else{
+  var count = false;
+	 	for(var x in obj){
+		 	var t = iterator(obj[x])
+		 		if(t == true){
+			 		count = true;
+		 		}if(t == undefined){
+			 		count = true;
+		 		}
+	 	}
+	 	console.log(count);
+  	return count;
+  	}
   };
-
 
   /*
    * These are a couple of helpers for merging objects
@@ -295,7 +314,9 @@ var _ = {};
   //   }); // obj1 now contains key1, key2, key3 and bla
   //
   _.extend = function(obj) {
+  	
   };
+  
 
   // Like extend, but doesn't ever overwrite a key that already
   // exists in obj
