@@ -278,7 +278,7 @@ _.each = function(obj, iterator) {
     		}if(obj[x] == undefined){
 			 		count = true;
 		 		}
-		 		console.log(count);
+		 		//console.log(count);
     		return count;
     	}
 	    
@@ -292,7 +292,7 @@ _.each = function(obj, iterator) {
 			 		count = true;
 		 		}
 	 	}
-	 	console.log(count);
+	 	//console.log(count);
   	return count;
   	}
   };
@@ -313,14 +313,53 @@ _.each = function(obj, iterator) {
   //     bla: "even more stuff"
   //   }); // obj1 now contains key1, key2, key3 and bla
   //
-  _.extend = function(obj) {
+  //steps
+  // assign first element to variable
+  // delete first element from obj
+  // loop through obj and add each value to obj 1
+  /*_.extend = function() {
+  	var nelement = arguments[0];
+  	//console.log(arguments[0]);
+  	for(var i = 1; i < arguments.length; i++){
+  		
+	  	console.log(Object.keys(arguments[i]));
+	  	var t = Object.keys(arguments[i]);
+	  	console.log(arguments[i].t);
+  	}*/
   	
-  };
+  	
+	//console.log(nelement)	
+	_.extend = function() {
+	var obj = {};
+	for(var i = 0; i < arguments.length; i++){
+		var obj1 = arguments[i];
+	
+  for (var x in obj1)
+    if (obj1.hasOwnProperty(x))
+      obj[x] = obj1[x];
+
+  }
+
+  return obj;
+	};
   
 
   // Like extend, but doesn't ever overwrite a key that already
   // exists in obj
   _.defaults = function(obj) {
+  var obj = {};
+	for(var i = 0; i < arguments.length; i++){
+		var obj1 = arguments[i];
+	
+  for (var x in obj1)
+  if (obj1.hasOwnProperty(x))
+      obj[x] = obj1[x];
+
+  }
+  //console.log(obj);
+  return obj;
+  
+  
   };
 
 
@@ -358,6 +397,13 @@ _.each = function(obj, iterator) {
   // already computed the result for the given argument and return that value
   // instead if possible.
   _.memoize = function(func) {
+  	var funcArray = [];
+  	if(func in funcArray){
+	  	return func.value
+  	}else{
+	  	var t = func
+	  	funcArray.append(t);
+  	}
   };
 
   // Delays a function for the given number of milliseconds, and then calls
@@ -376,6 +422,7 @@ _.each = function(obj, iterator) {
 
   // Shuffle an array.
   _.shuffle = function(obj) {
+  
   };
 
   /* (End of pre-course curriculum) */

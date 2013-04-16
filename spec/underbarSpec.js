@@ -207,11 +207,7 @@ describe("invoke with function reference", function() {
   });
 });
 
-*/
-/*
-/*
-/*
-*/
+
 describe("reduce", function() {
   it("should be able to sum up an array", function() {
     var callback = function(sum, num) {return sum + num; };
@@ -367,6 +363,11 @@ describe("extend", function() {
   });
 });
 /*
+*/
+/*
+/*
+/*
+*/
 
 describe("defaults", function() {
   var result, options;
@@ -391,7 +392,7 @@ describe("defaults", function() {
     expect(options.word).to.equal("word");
   });
 });
-
+/*
 describe("once", function() {
   it("should only run a user-defined function if it hasn't been run before", function() {
     var num = 0;
@@ -404,6 +405,8 @@ describe("once", function() {
     expect(num).to.equal(1);
   });
 });
+
+*/
 
 describe("memoize", function() {
   it("a memoized function should produce the same result when called with the same arguments", function() {
@@ -464,7 +467,7 @@ describe("shuffle", function() {
     expect(shuffled.sort()).to.eql(numbers);
   });
 });
-
+/*
 describe("sortBy", function() {
   it("should sort by age", function() {
     var people = [{name : 'curly', age : 50}, {name : 'moe', age : 30}];
