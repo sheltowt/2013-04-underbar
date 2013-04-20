@@ -1,4 +1,4 @@
-/*
+var returnArguments = function(){ return arguments; };
 
 describe("last", function() {
   it("should pull the last element from an array", function() {
@@ -381,6 +381,7 @@ describe("defaults", function() {
     expect(options.zero).to.equal(0);
     expect(options.one).to.equal(1);
     expect(options.twenty).to.equal(20);
+    
   });
 
   it("should not apply a value if one already exist on the target", function() {
@@ -462,9 +463,11 @@ describe("delay", function() {
 describe("shuffle", function() {
   it("should not modify the original object", function() {
     var numbers = _.range(10);
+    
     var shuffled = _.shuffle(numbers);
 
     expect(shuffled.sort()).to.eql(numbers);
+    
   });
 });
 /*

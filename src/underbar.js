@@ -7,20 +7,13 @@ var _ = {};
   _.last = function(array, n) {
   if(n == undefined){
 	  var newt1 = array.pop();
-	  console.log("first");
-	  console.log(newt1);
 	  return newt1;
   }
   if(n == 0){
   	  var p = new Array(); 
-	  
-	  console.log("third");
-	  console.log(p);
 	  return p;
   }
   if (n > array.length){
-  	  	console.log("fourth");
-  	  	console.log(array);
   	  	return array;
   	  	}
   else{
@@ -33,9 +26,6 @@ var _ = {};
 		  y += 1;
 		  i ++;
 	  }
-	  
-	  console.log("second");
-	  console.log(nums);
 	  return nums;
 	  }
   };
@@ -43,27 +33,23 @@ var _ = {};
 
   // Like last, but for the first elements
   _.first = function(array, n) {
-  
     if(n > array.length){
-  	  	console.log("fourth");
-  	  	console.log(array);
   	  	return array;
+  	}if(n == undefined){
+  	console.log(array[0]);
+	  	return array[0];
   	}
     else{
     	var i = 0;
     	var nums = new Array()
 	    while(i < n){
-	    var t = array[i];
-	    nums.push(t);
-	    i ++;
-	 } 
-	 console.log("nums"); 
-	 console.log(nums);   
+	      var t = array[i];
+	      nums.push(t);
+	      i ++;
+	    }
+	    return(nums);  
     }
     // TIP: you can often re-use similar functions in clever ways, like so:
-    if(n == undefined){
-    return _.last(array.reverse(), n);
-    }
     if(n == 0){
     return _.last(array.reverse(), n);
     }
@@ -72,21 +58,13 @@ var _ = {};
 
 
   // Call iterator(value, key, collection) for each element of collection
-_.each = function(obj, iterator) {  
-	if(Array.isArray(obj)){
-    for( var i = 0; i < obj.length; i++){
-      iterator(obj[i], i, obj);
-    } 
-  } else {
-    for(var key in obj){
-      if(obj.hasOwnProperty(key)){
-        iterator(obj[key], key, obj)
+_.each = function(obj, iterator) {
+  for(var i = 0; i < obj.length; i++){
+	  iterator.call(context, obj[i], i, obj);
+  };
+    
+  
 
-      }
-
-    }
-
-  }
 
 };
 
@@ -113,16 +91,14 @@ _.each = function(obj, iterator) {
   };
 
   // Return all elements of an array that pass a truth test.
-  _.filter = function(collections, iterator) {
-  	console.log(collections)
+_.filter = function(collections, iterator) {
   	var arrr = new Array();
   	for(var i in collections){
 	  	if(iterator(i) === false){
 		  	arrr.push(collections[i]);
 	  	}
-	  	
+
   	}
-  	console.log(arrr);
   	return arrr;
   };
 
@@ -134,9 +110,8 @@ _.each = function(obj, iterator) {
 	  	if(iterator(i) === true){
 		  	arrr.push(collections[i]);
 	  	}
-	  	
   	}
-  	console.log(arrr);
+  	//console.log(arrr);
   	return arrr;
   };
     // TIP: see if you can re-use _.select() here, without simply
@@ -151,7 +126,6 @@ _.each = function(obj, iterator) {
 		  	 uniquevalues.push(array[i]);
 		  	 }
 	  	
-	  	console.log(uniquevalues);
 	  	return uniquevalues;
 };
 
@@ -169,7 +143,7 @@ _.each = function(obj, iterator) {
 	  		newt.push(t);
 	  		
   		}
-  		console.log(newt)
+  		//console.log(newt)
   		return newt
   		
   };
@@ -203,7 +177,6 @@ _.each = function(obj, iterator) {
 	  		}
 	  		
   		}
-  		console.log(transformed);
   		return transformed;
   };
 
@@ -265,37 +238,23 @@ _.each = function(obj, iterator) {
 
   // Determine whether any of the elements pass a truth test. If no iterator is
   // provided, provide a default one
-  _.any = function(obj, iterator) {
-    // TIP: re-use every() here
-    if(obj === []){
-	    return false;
-    }
-    if(iterator == undefined){
-    	var count = false;
-    	for(var x in obj){
-    		if(obj[x] == true){
-	    		count = true;
-    		}if(obj[x] == undefined){
-			 		count = true;
-		 		}
-		 		//console.log(count);
-    		return count;
-    	}
-	    
-    }else{
-  var count = false;
-	 	for(var x in obj){
-		 	var t = iterator(obj[x])
-		 		if(t == true){
-			 		count = true;
-		 		}if(t == undefined){
-			 		count = true;
-		 		}
-	 	}
-	 	//console.log(count);
-  	return count;
-  	}
+
+_.any = function(obj, iterator) {
+  var anyTrue = false;
+  if(!iterator){
+	  iterator = function(i){
+	  return i;
   };
+  }
+  _.each(obj, function(value, index, obj){
+    if(iterator.call(context, value, index, obj)){
+	    anyTrue = true;
+    }
+    });
+    return anyTrue;
+};
+
+
 
   /*
    * These are a couple of helpers for merging objects
@@ -347,20 +306,19 @@ _.each = function(obj, iterator) {
   // Like extend, but doesn't ever overwrite a key that already
   // exists in obj
   _.defaults = function(obj) {
-  var obj = {};
+  	var obj = {};
 	for(var i = 0; i < arguments.length; i++){
 		var obj1 = arguments[i];
 	
   for (var x in obj1)
-  if (obj1.hasOwnProperty(x))
+    if (obj1.hasOwnProperty(x))
       obj[x] = obj1[x];
 
   }
-  //console.log(obj);
+
   return obj;
-  
-  
-  };
+	};
+
 
 
   /*
@@ -374,6 +332,7 @@ _.each = function(obj, iterator) {
     // TIP: These variables are stored in a `closure scope` (worth researching),
     // so that they'll remain available to the newly-generated function every
     // time it's called.
+    
     var alreadyCalled = false;
     var result;
     // TIP: We'll return a new function that delegates to the old one, but only
@@ -413,6 +372,10 @@ _.each = function(obj, iterator) {
   // parameter. For example _.delay(someFunction, 500, 'a', 'b') will
   // call someFunction('a', 'b') after 500ms
   _.delay = function(func, wait) {
+  var now = function(){
+	  return func(1, 2);
+  }
+  setTimeout(now, wait)
   };
 
 
@@ -421,9 +384,31 @@ _.each = function(obj, iterator) {
    */
 
   // Shuffle an array.
-  _.shuffle = function(obj) {
+     _.range = function(range) {
+    var nums = [];
+    for(var i = 0; i< range ; i++)
+    {
+      nums.push(i);
+    }
+    return nums;
+
+   }
   
-  };
+  
+  _.shuffle = function(obj) {
+  for (var n = 0; n < obj.length - 1; n++) {
+        var i = obj.length;
+  if ( i == 0 ) return false;
+  while ( --i ) {
+     var j = Math.floor( Math.random() * ( i + 1 ) );
+     var tempi = obj[i];
+     var tempj = obj[j];
+     obj[i] = tempj;
+     obj[j] = tempi;
+   }
+}
+return obj;
+};
 
   /* (End of pre-course curriculum) */
 
