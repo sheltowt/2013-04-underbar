@@ -306,18 +306,21 @@ _.any = function(obj, iterator) {
   // Like extend, but doesn't ever overwrite a key that already
   // exists in obj
   _.defaults = function(obj) {
-  	var obj = {};
-	for(var i = 0; i < arguments.length; i++){
-		var obj1 = arguments[i];
-	
-  for (var x in obj1)
-    if (obj1.hasOwnProperty(x))
-      obj[x] = obj1[x];
-
-  }
-
-  return obj;
-	};
+    var original = arguments[0];
+    for(var i = 1; i < arguments.length; i++){
+      var current = arguments[i];
+      console.log(current);
+      for(var x in current){
+        var checkValue = x
+        console.log(checkValue);
+        var check = original.hasOwnProperty(checkValue);
+	    if(!check){
+		  original[checkValue] = current[checkValue];    
+	    }
+	    //console.log(original);    
+      }
+    }
+  };
 
 
 
@@ -356,14 +359,19 @@ _.any = function(obj, iterator) {
   // already computed the result for the given argument and return that value
   // instead if possible.
   _.memoize = function(func) {
-  	var funcArray = [];
-  	if(func in funcArray){
-	  	return func.value
-  	}else{
-	  	var t = func
-	  	funcArray.append(t);
-  	}
+    var passedResults = {};
+    var alreadyCalled = passedResults.hasOwnProperty(func);
+    return function(){
+    if(!alreadyCalled){
+	  passedResults[func] = func.apply(this, arguments);      
+    }
+    return passedResults[func];
+    };
   };
+    
+    //var execute = function(){func();}
+    //return _.once(execute);
+
 
   // Delays a function for the given number of milliseconds, and then calls
   // it with the arguments supplied.

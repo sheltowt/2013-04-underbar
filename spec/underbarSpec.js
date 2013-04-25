@@ -384,6 +384,7 @@ describe("defaults", function() {
     
   });
 
+
   it("should not apply a value if one already exist on the target", function() {
     expect(options.empty).to.equal("");
     expect(isNaN(options.nan)).to.equal(true);
@@ -393,7 +394,8 @@ describe("defaults", function() {
     expect(options.word).to.equal("word");
   });
 });
-/*
+
+
 describe("once", function() {
   it("should only run a user-defined function if it hasn't been run before", function() {
     var num = 0;
@@ -406,8 +408,6 @@ describe("once", function() {
     expect(num).to.equal(1);
   });
 });
-
-*/
 
 describe("memoize", function() {
   it("a memoized function should produce the same result when called with the same arguments", function() {
